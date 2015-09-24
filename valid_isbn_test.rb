@@ -29,7 +29,10 @@ class Isbn_verify<Minitest::Test
 
   def test_for_x
   assert_equal(true, check_digit_contains_X("080442957X"))
+  assert_equal(false, check_digit_contains_X("0398729488"))
+  assert_equal(true, check_digit_contains_X("473849389x"))
   end
+  
 
 
 
