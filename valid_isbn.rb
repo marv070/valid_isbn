@@ -40,6 +40,30 @@ def remove_spaces_from_isbn(book_number_array)
     book_number_array
 end
   
+def check_digit_10_is_valid(isbn)
+  array =[]
+
+  isbn.each do |value|
+  array << value.to_i 
+  end
+  
+  sum = 0
+
+  array.each.with_index do |value, index|
+  break if index == 9
+  sum += value * (index + 1)
+  end
+
+check_digit = sum%11
+
+  if check_digit == array[9]
+  true
+  else
+  false
+  end
+  
+end
+
 
 def check_digit_contains_X(isbn)
 isbn_number = isbn.split ""

@@ -27,14 +27,16 @@ class Isbn_verify<Minitest::Test
     assert_equal(["1","2","3","3","2","1","4","5","6","7"],book_number_array("1233214567"))
   end
 
+  def test_for_check_digit_10_is_valid
+  assert_equal(true, check_digit_10_is_valid(["0","3","0","6","4","0","6","1","5","2"]))
+  assert_equal(false, check_digit_10_is_valid([1,2,4,6,7,8,9,0,9,9]))
+  assert_equal(true, check_digit_10_is_valid([0,3,2,1,1,4,6,5,3,0]))
+  end
+
   def test_for_x
   assert_equal(true, check_digit_contains_X("080442957X"))
   assert_equal(false, check_digit_contains_X("0398729488"))
   assert_equal(true, check_digit_contains_X("473849389x"))
   end
   
-
-
-
-
 end
