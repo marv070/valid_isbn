@@ -80,6 +80,7 @@ check_digit = sum % 11
 end
 
 def check_digit_13_is_valid(isbn_array) 
+ isbn_array = isbn_array.split ""
   array=[]
    
   isbn_array.each do |value|
