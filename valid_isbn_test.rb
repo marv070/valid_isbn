@@ -1,48 +1,53 @@
-require_relative"valid_isbn.rb"
+require_relative"isbn.rb"
 require"minitest/autorun"
  
 class Isbn_verify<Minitest::Test  
 
-  def test_for_ten_digits
-    assert_equal(true,length_verifier("1234567892"))
-    assert_equal(false,length_verifier("123456789234"))
-    assert_equal(true,length_verifier("1234567891"))
+def test_for_valid_amount_of_digits
+  #assert_equal(true,verify_length("1234567890"))
+  assert_equal(false,verify_length(["1","0","2","9","3","8","4","7","5","7"]))
+  #assert_equal(true,verify_length("0-321-14653-0"))
+end
+
+
+def test_removes_dashes_from_isbn
+  assert_equal("0321146530",remove_dashes_and_spaces_from_isbn("0-321-14653-0"))
   end
 
-  def test_for_thirteen_digits
-    assert_equal(true,length_verifier("1234567891234"))
-    assert_equal(false,length_verifier("152347689"))
-  end
 
-  def test_for_removing_dashes_from_isbn
-    assert_equal("1234567891",remove_dashes_from_isbn("123-456-789-1"))
-  end
+def test_to_remove_spaces
+    assert_equal("1234567890", remove_dashes_and_spaces_from_isbn("123 4567 890"))
+    assert_equal("1237362781", remove_dashes_and_spaces_from_isbn("123 7362 781"))
+end 
 
-  def test_for_removing_spaces_from_isbn
-    assert_equal("9876543219",remove_spaces_from_isbn("987 654 321 9"))
-  end
+def test_for_X_in_ISBN
+    assert_equal(true, check_digit_contains_X([1,2,3,4,5,6,7,8,9,"x"]))
+    assert_equal(false, check_digit_contains_X([1,2,3,4,5,5,5,7,8,1]))
+end
 
+def test_for_only_numeric_characters
+  assert_equal(false, only_numeric_characters(["1","2","3","4","5","6","7","8","9","0"]))
+  assert_equal(false, only_numeric_characters(["1","2","3","4","5","6","7","8","9","10"]))
+  assert_equal(false, only_numeric_characters(["1","2"]))
+  assert_equal(true, only_numeric_characters(["a","b","d","1","2","3","d","e","f","1","2","3","0"]))
+end
   
-  def test_string_convert_to_array
-    assert_equal(["1","2","3","3","2","1","4","5","6","7"],book_number_array("1233214567"))
-  end
-
-  def test_for_check_digit_10_is_valid
+def test_for_check_digit_10
   assert_equal(true, check_digit_10_is_valid(["0","3","0","6","4","0","6","1","5","2"]))
   assert_equal(false, check_digit_10_is_valid([1,2,4,6,7,8,9,0,9,9]))
   assert_equal(true, check_digit_10_is_valid([0,3,2,1,1,4,6,5,3,0]))
-  assert_equal(true, check_digit_10_is_valid([8,7,1,1,0,7,5,5,9,7]))
-  assert_equal(true, check_digit_10_is_valid([0,4,7,1,1,9,0,4,7,0]))
-  end
-
-  def test_for_x
-  assert_equal(true, check_digit_contains_X("080442957X"))
-  assert_equal(false, check_digit_contains_X("0398729488"))
-  end
+end
   
-  def test_for_check_digit_13
-    assert_equal(false,check_digit_13_is_valid("4780470059029"))
-    assert_equal(true,check_digit_13_is_valid("9780131495050"))
-  end
 
+ def test_for_thirteen_character_math
+    assert_equal(true, check_digit_13_is_valid([9,7,8,0,1,5,6,0,2,7,3,2,8]))
+    assert_equal(false, check_digit_13_is_valid([9,7,8,0,4,7,0,0,0,9,0,2,9]))
+    assert_equal(false, check_digit_13_is_valid([1,3,4,5,6,7,8,9,1,1,1,1,2]))
+    assert_equal(true, check_digit_13_is_valid([9,7,8,0,4,7,0,0,5,9,0,2,9]))
+  end 
+  
+  
+  
+  
+  
 end
