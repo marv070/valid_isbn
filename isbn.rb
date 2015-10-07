@@ -64,12 +64,13 @@ def check_digit_contains_X(isbn_arr)#changed isbn_number_array
 #isbn_number_array=isbn_number_array.split ""
 
     if isbn_arr[9] == "x" or isbn_arr[9] == "X"
-      isbn_arr[9] = 10 && isbn_arr [9] = true
-      false
+      isbn_arr[9] = 10 
+      
     end
  @new_isbn_number = isbn_arr              
 
 end
+
 
 def only_numeric_characters(isbn_number)#(isbn_number)
     book_num = isbn_number.join("")
