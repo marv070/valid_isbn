@@ -3,26 +3,26 @@ require"minitest/autorun"
  
 class Isbn_verify<Minitest::Test  
 
-# def test_for_valid_amount_of_digits
-#   assert_equal(true,verify_length("1234567890"))
-#   assert_equal(false,verify_length( "134689763"))
-#   assert_equal(true,verify_length("0321146530987"))
-# end
+def test_for_valid_amount_of_digits
+  assert_equal(true,verify_length("1234567890"))
+  assert_equal(false,verify_length( "134689763"))
+  assert_equal(true,verify_length("0321146530987"))
+end
 
 
-# def test_removes_dashes_from_isbn
-#   assert_equal("0321146530",remove_dashes_and_spaces_from_isbn("0-321-14653-0"))
-#   end
+def test_removes_dashes_from_isbn
+  assert_equal("0321146530",remove_dashes_and_spaces_from_isbn("0-321-14653-0"))
+  end
 
 
-# def test_to_remove_spaces
-#     assert_equal("1234567890", remove_dashes_and_spaces_from_isbn("123 4567 890"))
-#     assert_equal("1237362781", remove_dashes_and_spaces_from_isbn("123 7362 781"))
-# end 
+def test_to_remove_spaces
+    assert_equal("1234567890", remove_dashes_and_spaces_from_isbn("123 4567 890"))
+    assert_equal("1237362781", remove_dashes_and_spaces_from_isbn("123 7362 781"))
+end 
 
-# def test_with_spaces_and_hyphens
-#     assert_equal("1234567890", remove_dashes_and_spaces_from_isbn("1 2-3-4-5678-9 0"))
-# end
+def test_with_spaces_and_hyphens
+    assert_equal("1234567890", remove_dashes_and_spaces_from_isbn("1 2-3-4-5678-9 0"))
+end
 
 def test_input_string_is_a_valid_isbn1
     
@@ -41,6 +41,19 @@ end
 def test_input_string_is_a_valid_isbn4
     assert_equal(false,valid_isbn?("1471958697"))
     
+end
+
+def test_for_check_digit_containing_X_in_ISBN
+    assert_equal(true, check_digit_contains_X("877195869x"))
+    assert_equal(false, check_digit_contains_X("1234555781"))
+    assert_equal(false, check_digit_contains_X("877195x869"))
+end
+ 
+def test_for_non_numeric_characters_in_isbn
+  assert_equal(true,test_for_non_numeric_characters("1234567890"))
+  assert_equal(true,test_for_non_numeric_characters("1234567890123"))
+  #assert_equal(false,test_for_non_numeric_characters("abd123def1230"))
+  assert_equal(false, test_for_non_numeric_characters("47804700590b"))
 end
 
 # def test_for_X_in_ISBN

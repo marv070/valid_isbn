@@ -18,8 +18,10 @@
 
 def valid_isbn?(any_string)
   no_dashes_or_spaces = remove_dashes_and_spaces_from_isbn(any_string)
+  
   if no_dashes_or_spaces.length == 10
-  valid_isbn_10?(no_dashes_or_spaces) 
+    check_digit_contains_X(no_dashes_or_spaces)
+    valid_isbn_10?(no_dashes_or_spaces) 
 
 
   else
@@ -28,10 +30,13 @@ def valid_isbn?(any_string)
  
 end
 
-def valid_isbn_10?(no_dashes_or_spaces)
-    array =[]
 
-    isbn_arr.each do |value|
+def valid_isbn_10?(no_dashes_or_spaces)
+    no_dashes_or_spaces = no_dashes_or_spaces.split ""
+
+array =[]
+
+    no_dashes_or_spaces.each do |value|
     array << value.to_i 
     end
     
@@ -43,7 +48,7 @@ sum = 0
     sum += value * (index + 1)
     end
 
-check_digit = sum%11
+check_digit = sum % 11
 
     if check_digit == array[9]
      true
@@ -52,8 +57,6 @@ check_digit = sum%11
     end
     
 end
-
-
 
 def remove_dashes_and_spaces_from_isbn(isbn_number)
     disallowed_characters = [ " ", "-"]
@@ -78,9 +81,31 @@ def verify_length(isbn_number)
   isbn_number.length == 10 || isbn_number.length == 13
 end
 
+def check_digit_contains_X(no_dashes_or_spaces)
+no_dashes_or_spaces = no_dashes_or_spaces.split(//)
+  if no_dashes_or_spaces[9] == "x" || no_dashes_or_spaces[9] == "X"
+  no_dashes_or_spaces[9] = 10
+  end
+    if no_dashes_or_spaces[9] == 10
+    true
+    else
+    false
+    end
+  
+end
 
+def test_for_non_numeric_characters(no_dashes_or_spaces)
+   only_digits = no_dashes_or_spaces
+  
+  if  only_digits  =~ /[[:digit:]]/  #/\D/ 
+    return
+      true
+  else
+    return
+      false
+  end 
 
-
+end
 
 
 
