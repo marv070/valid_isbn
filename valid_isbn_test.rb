@@ -47,6 +47,7 @@ def test_for_check_digit_containing_X_in_ISBN
     assert_equal(false, check_digit_contains_X("877195x869"))
 end
  
+
 def test_for_non_numeric_characters_in_isbn
   assert_equal(false,test_for_non_numeric_characters("jjjjjjjjjj"))
   assert_equal(true,test_for_non_numeric_characters("1234567890120"))
@@ -55,12 +56,13 @@ def test_for_non_numeric_characters_in_isbn
   assert_equal(true,test_for_non_numeric_characters("1234567890"))
 end
 
-def test_for_thirteen_character_math
+def test_for_valid_thirteen_digit_isbn
   assert_equal(true, valid_isbn?("9780156027328"))
   assert_equal(false, valid_isbn?("9780470009029"))
   assert_equal(false, valid_isbn?("1345678911112"))
-  assert_equal(true, valid_isbn?("9780470059029"))
-  end 
+  assert_equal(true, valid_isbn?("9 78 0470-059-029"))
+  assert_equal(true, valid_isbn?("978-0-13-149505-0"))
+end 
 
 
 
