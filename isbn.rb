@@ -21,11 +21,16 @@ def valid_isbn?(any_string)
   
   if no_dashes_or_spaces.length == 10
     check_digit_contains_X(no_dashes_or_spaces)
+    test_for_non_numeric_characters(no_dashes_or_spaces)
     valid_isbn_10?(no_dashes_or_spaces) 
+  
+  
+  else no_dashes_or_spaces.length == 13
+    test_for_non_numeric_characters(no_dashes_or_spaces)
+    valid_isbn_13?(no_dashes_or_spaces)
+  
+  #elsif false
 
-
-  else
-     false
   end
  
 end
@@ -57,6 +62,42 @@ check_digit = sum % 11
     end
     
 end
+
+def valid_isbn_13?(no_dashes_or_spaces)
+no_dashes_or_spaces = no_dashes_or_spaces.split(//)
+ 
+ array =[]
+ 
+   no_dashes_or_spaces.each do |value|
+   array << value.to_i
+   end
+ 
+ sum = 0
+ check_digit = 0
+ 
+   array.each_with_index do |value,index|
+     break if index == 12
+         if index  %2 == 0
+           sum += value * 1
+          else
+           sum += value * 3
+         end    
+ end        
+       sum = sum %10
+   check_digit=(10-sum)
+    
+    if check_digit == 10
+       check_digit = 0
+     end
+    
+     if array[12] == check_digit
+       true
+     else
+      false
+     end
+        
+ end
+
 
 def remove_dashes_and_spaces_from_isbn(isbn_number)
     disallowed_characters = [ " ", "-"]

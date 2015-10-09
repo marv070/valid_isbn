@@ -12,6 +12,7 @@ end
 
 def test_removes_dashes_from_isbn
   assert_equal("0321146530",remove_dashes_and_spaces_from_isbn("0-321-14653-0"))
+  assert_equal("1234567890123",remove_dashes_and_spaces_from_isbn("12-345-678-9-0123"))
   end
 
 
@@ -24,24 +25,21 @@ def test_with_spaces_and_hyphens
     assert_equal("1234567890", remove_dashes_and_spaces_from_isbn("1 2-3-4-5678-9 0"))
 end
 
-def test_input_string_is_a_valid_isbn1
-    
-    assert_equal(false,valid_isbn?("0471958698"))
+def test_input_string_is_a_valid_isbn_for_10_degit
+  assert_equal(false,valid_isbn?("0471958698"))
+  assert_equal(true,valid_isbn?("0 4 7-1958697"))
+  assert_equal(true,valid_isbn?("0471958697"))
+  assert_equal(false,valid_isbn?("1471958697"))
+
 end
 
-def test_input_string_is_a_valid_isbn2
-    assert_equal(true,valid_isbn?("0 4 7-1958697"))
+def test_for_check_digit_10_being_valid_with_more_test
+  assert_equal(true, valid_isbn?("0306406152"))
+  assert_equal(false, valid_isbn?("1246789099"))
+  assert_equal(true, valid_isbn?("0321146530"))
 end
 
-def test_input_string_is_a_valid_isbn3
-    assert_equal(true,valid_isbn?("0471958697"))
-    
-end
 
-def test_input_string_is_a_valid_isbn4
-    assert_equal(false,valid_isbn?("1471958697"))
-    
-end
 
 def test_for_check_digit_containing_X_in_ISBN
     assert_equal(true, check_digit_contains_X("877195869x"))
@@ -56,6 +54,24 @@ def test_for_non_numeric_characters_in_isbn
   assert_equal(false, test_for_non_numeric_characters("47804700590@"))
   assert_equal(true,test_for_non_numeric_characters("1234567890"))
 end
+
+def test_for_thirteen_character_math
+  assert_equal(true, valid_isbn?("9780156027328"))
+  assert_equal(false, valid_isbn?("9780470009029"))
+  assert_equal(false, valid_isbn?("1345678911112"))
+  assert_equal(true, valid_isbn?("9780470059029"))
+  end 
+
+
+
+
+# def test_for_check_digit_10
+#   assert_equal(true, valid_isbn?("0306406152"))
+#   assert_equal(false, valid_isbn?("1246789099"))
+#   assert_equal(true, valid_isbn?("0321146530"))
+# end
+
+
 
 # def test_for_X_in_ISBN
 #    assert_equal([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], check_digit_contains_X([1,2,3,4,5,6,7,8,9,"x"]))
