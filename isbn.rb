@@ -97,12 +97,12 @@ end
 def test_for_non_numeric_characters(no_dashes_or_spaces)
    only_digits = no_dashes_or_spaces
   
-  if  only_digits  =~ /[[:digit:]]/  #/\D/ 
-    return
-      true
-  else
-    return
+  if  only_digits =~ /\D/      #match any character that is not a digit
+    #return
       false
+  else
+    #return
+      true
   end 
 
 end

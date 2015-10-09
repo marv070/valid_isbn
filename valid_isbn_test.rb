@@ -50,10 +50,11 @@ def test_for_check_digit_containing_X_in_ISBN
 end
  
 def test_for_non_numeric_characters_in_isbn
+  assert_equal(false,test_for_non_numeric_characters("jjjjjjjjjj"))
+  assert_equal(true,test_for_non_numeric_characters("1234567890120"))
+  assert_equal(false,test_for_non_numeric_characters("abd123def1230"))
+  assert_equal(false, test_for_non_numeric_characters("47804700590@"))
   assert_equal(true,test_for_non_numeric_characters("1234567890"))
-  assert_equal(true,test_for_non_numeric_characters("1234567890123"))
-  #assert_equal(false,test_for_non_numeric_characters("abd123def1230"))
-  assert_equal(false, test_for_non_numeric_characters("47804700590b"))
 end
 
 # def test_for_X_in_ISBN
