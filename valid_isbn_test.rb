@@ -33,7 +33,7 @@ def test_input_string_is_a_valid_isbn_for_10_degit
 
 end
 
-def test_for_check_digit_10_being_valid_with_more_test
+def test_for_check_digit_10_being_valid
   assert_equal(true, valid_isbn?("0306406152"))
   assert_equal(false, valid_isbn?("1246789099"))
   assert_equal(true, valid_isbn?("0321146530"))
@@ -47,6 +47,12 @@ def test_for_check_digit_containing_X_in_ISBN
     assert_equal(false, check_digit_contains_X("877195x869"))
 end
  
+# def test_for_valid_10_digit_isbn_with_x_for_check_digit
+#   #assert_equal(true,valid_isbn?("0312341613X"))
+#   assert_equal(true,valid_isbn?("877195869x"))
+# end
+
+
 
 def test_for_non_numeric_characters_in_isbn
   assert_equal(false,test_for_non_numeric_characters("jjjjjjjjjj"))
