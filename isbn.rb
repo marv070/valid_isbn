@@ -11,36 +11,42 @@ def read_file_and_output
           file_new.puts line.chomp + ",invalid"
                     end
         end
-    
+    file_old.close
     file_new.close
 
 end
 
 def valid_isbn?(any_string)
   no_dashes_or_spaces = remove_dashes_and_spaces_from_isbn(any_string)
-  if no_dashes_or_spaces.length == 10
-    check_digit_contains_X(no_dashes_or_spaces)
-    if test_for_non_numeric_characters(no_dashes_or_spaces) == false 
-      @output = false
-    else
-  valid_isbn_10?(no_dashes_or_spaces) 
-    end
+  no_dash_split = no_dashes_or_spaces.split("")
+    if no_dash_split.length  == 10
+   
+  x_equals_10 = check_digit_contains_X(no_dash_split)
   
-  else no_dashes_or_spaces.length == 13
-    if test_for_non_numeric_characters(no_dashes_or_spaces) == false
-      @output = false
-    else
-    valid_isbn_13?(no_dashes_or_spaces)
-    end
-  #elsif false
+      if test_for_non_numeric_characters(x_equals_10) == false 
+        @output = false
+      else
+        valid_isbn_10?(x_equals_10) 
+      end
+  
+    elsif no_dash_split.length == 13
+     
+      if test_for_non_numeric_characters(no_dash_split) == false
+        @output = false
+      else
+        valid_isbn_13?(no_dash_split)
+      end
+      
+      else
+        @output = false
 
-  end
+    end
  
 end
 
 
 def valid_isbn_10?(no_dashes_or_spaces)
-    no_dashes_or_spaces = no_dashes_or_spaces.split ""
+    #no_dashes_or_spaces = no_dashes_or_spaces.split ("") - split in main function
 
 array =[]
 
@@ -67,7 +73,7 @@ check_digit = sum % 11
 end
 
 def valid_isbn_13?(no_dashes_or_spaces)
-no_dashes_or_spaces = no_dashes_or_spaces.split(//)
+#no_dashes_or_spaces = no_dashes_or_spaces.split(//) splitting in main function only
  
  array =[]
  
@@ -102,14 +108,14 @@ no_dashes_or_spaces = no_dashes_or_spaces.split(//)
  end
 
 
-def remove_dashes_and_spaces_from_isbn(isbn_number)
+def remove_dashes_and_spaces_from_isbn(any_string)
     disallowed_characters = [ " ", "-"]
     
     disallowed_characters.each do | c|
-      isbn_number.delete! c if isbn_number.include? c
-    end
-     print isbn_number 
-     isbn_number
+      any_string.delete! c if any_string.include? c
+    end 
+     #puts isbn_number this was to see if extra characters were being added 
+     any_string
 end
 
 
@@ -122,25 +128,25 @@ end
 #      verify_length(isbn_number_array)
 # end
 
-def verify_length(isbn_number)
-  isbn_number.length == 10 || isbn_number.length == 13
+def verify_length(any_string)
+  any_string.length == 10 || any_string.length == 13
 end
 
-def check_digit_contains_X(no_dashes_or_spaces)
-  no_dashes_or_spaces = no_dashes_or_spaces.split("")
-  if no_dashes_or_spaces[9] == "x" || no_dashes_or_spaces[9] == "X"
-  no_dashes_or_spaces[9] = 10
+def check_digit_contains_X(no_dash_split)
+  #no_dashes_or_spaces = no_dashes_or_spaces.split("") - now splitting in main function
+  if no_dash_split[9] == "x"|| no_dash_split[9] == "X"
+  no_dash_split[9] = 10
   end
-    if no_dashes_or_spaces[9] == 10
-     true
-     else
-     false
-    end
-  
+     #no_dashes_or_spaces[9] == 10 # removed if statment
+     # "10"
+      #else
+      #false
+    #end
+  no_dash_split
 end
 
-def test_for_non_numeric_characters(no_dashes_or_spaces)
-   only_digits = no_dashes_or_spaces
+def test_for_non_numeric_characters(no_dash_split)
+   only_digits = no_dash_split
   
   if  only_digits =~ /\D/      #match any character that is not a digit
     #return
@@ -151,7 +157,6 @@ def test_for_non_numeric_characters(no_dashes_or_spaces)
   end 
 
 end
-
 
 
 
