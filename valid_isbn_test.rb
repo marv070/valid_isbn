@@ -27,14 +27,14 @@ class Isbn_verify<Minitest::Test
 
  
   def test_for_check_digit_containing_X_in_ISBN
-    assert_equal([8,7,7,1,9,5,8,6,9,10], check_digit_contains_X([8,7,7,1,9,5,8,6,9,"x"]))
-    assert_equal([1,2,3,4,5,5,5,7,8,1], check_digit_contains_X([1,2,3,4,5,5,5,7,8,1]))
-    assert_equal([8,7,7,1,9,5,8,6,9,10], check_digit_contains_X([8,7,7,1,9,5,8,6,9,"X"])) # upcase X
+    assert_equal("87719586910", check_digit_contains_X("877195869x"))
+    assert_equal("1234555781", check_digit_contains_X("1234555781"))
+    assert_equal("87719586910", check_digit_contains_X("877195869X")) # upcase X
   end
  
 
   def test_for_non_numeric_characters_in_isbn
-    assert_equal(false,test_for_non_numeric_characters("jjjjjjjjjj"))
+    assert_equal(false,test_for_non_numeric_characters("jjj jjj-jjjjj"))
     assert_equal(true,test_for_non_numeric_characters("1234567890120"))
     assert_equal(false,test_for_non_numeric_characters("abd123def1230"))
     assert_equal(false, test_for_non_numeric_characters("47804700590@"))
@@ -74,6 +74,8 @@ class Isbn_verify<Minitest::Test
     assert_equal(true, valid_isbn?("9 78 0470-059-029"))
     assert_equal(true, valid_isbn?("978-0-13-149505-0"))
     assert_equal(true, valid_isbn?("978-3-16-148410-0"))
+    assert_equal(true, valid_isbn?("978-0-306-40615-7"))
+    assert_equal(false, valid_isbn?("9 78 0470%059-029"))
   end 
   
 end
