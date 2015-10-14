@@ -19,7 +19,7 @@ end
 
 def valid_isbn?(any_string)
   no_dashes_or_spaces = remove_dashes_and_spaces_from_isbn(any_string)
-  no_dash_split = no_dashes_or_spaces.split("")
+  no_dash_split = split_string(no_dashes_or_spaces)
     if no_dash_split.length  == 10
    
   x_equals_10 = check_digit_contains_X(no_dash_split)
@@ -108,6 +108,10 @@ def valid_isbn_13?(no_dashes_or_spaces)
         
  end
 
+def split_string(any_string)
+  any_string.split("")
+end
+
 
 def remove_dashes_and_spaces_from_isbn(any_string)
     disallowed_characters = [ " ", "-", "\n", "\""]
@@ -138,7 +142,8 @@ def check_digit_contains_X(array)
 end
 
 def test_for_non_numeric_characters(no_dash_split)
-   only_digits = no_dash_split
+  # takes an array of strings and returns boolean
+   only_digits = no_dash_split.join
   
   if  only_digits =~ /\D/      #match any character that is not a digit
     #return
