@@ -40,12 +40,12 @@ class Isbn_verify<Minitest::Test
  
 
   def test_for_non_numeric_characters_in_isbn
-    #assert_equal(false,test_for_non_numeric_characters("jjj jjj-jjjjj"))
+    assert_equal(false,test_for_non_numeric_characters(["j","j","j","j","j","j","j","j","j","j","j"]))
     assert_equal(true,test_for_non_numeric_characters(["1","2","3","4","5","6","7","8","9","0","1","2","0"]))
-    # assert_equal(false,test_for_non_numeric_characters("abd123def1230"))
-    # assert_equal(false, test_for_non_numeric_characters("47804700590@"))
-    # assert_equal(true,test_for_non_numeric_characters("1234567890"))
-    # assert_equal(false, test_for_non_numeric_characters("877195x869"))
+    assert_equal(false,test_for_non_numeric_characters(["a","b","d","1","2","3","d","e","f","1","2","3","0"]))
+    assert_equal(false, test_for_non_numeric_characters(["4","7","8","0","4","7","0","0","5","9","0","@"]))
+    assert_equal(true,test_for_non_numeric_characters(["1","2","3","4","5","6","7","8","9","0"]))
+    assert_equal(false, test_for_non_numeric_characters(["8","7","7","1","9","5","x","8","6","9"]))  # X in the middle returns false/invalid
   end
 
 ########### all remaining test are testing through main function
@@ -83,6 +83,9 @@ class Isbn_verify<Minitest::Test
     assert_equal(true, valid_isbn?("978-3-16-148410-0"))
     assert_equal(true, valid_isbn?("978-0-306-40615-7"))
     assert_equal(false, valid_isbn?("9 78 0470%059-029"))
+  
+    assert_equal(true, valid_isbn?("877195869x"))    
+
   end 
   
 end
