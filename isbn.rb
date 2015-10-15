@@ -1,4 +1,5 @@
 def read_file_and_output
+  ## Takes in a boolean from valid_isbn fuction and returns text 
   file_old = File.open("input_isbn_file.csv","r")
   file_name = "isbn_output_test.csv"
   file_new = File.open(file_name, "w")
@@ -18,6 +19,7 @@ def read_file_and_output
 end
 
 def valid_isbn?(any_string)
+  ## Takes in a string and returns boolean
   no_dashes_or_spaces = remove_dashes_and_spaces_from_isbn(any_string)
   no_dash_split = split_string(no_dashes_or_spaces)
     if no_dash_split.length  == 10
@@ -47,8 +49,7 @@ end
 
 
 def valid_isbn_10?(no_dashes_or_spaces)
-    #no_dashes_or_spaces = no_dashes_or_spaces.split ("") - split in main function
-
+    # Takes in a String and returns a Boolean
 array =[]
 
     no_dashes_or_spaces.each do |value|
@@ -74,9 +75,8 @@ check_digit = sum % 11
 end
 
 def valid_isbn_13?(no_dashes_or_spaces)
-#no_dashes_or_spaces = no_dashes_or_spaces.split(//) splitting in main function only
- 
- array =[]
+# Takes in a String and returns a Boolean
+  array =[]
  
    no_dashes_or_spaces.each do |value|
    array << value.to_i
@@ -109,11 +109,13 @@ def valid_isbn_13?(no_dashes_or_spaces)
  end
 
 def split_string(any_string)
+  ## Takes in a string and returns array of strings
   any_string.split("")
 end
 
 
 def remove_dashes_and_spaces_from_isbn(any_string)
+    ## Takes in String and returns String without disallowed characters
     disallowed_characters = [ " ", "-", "\n", "\""]
     
     disallowed_characters.each do | c|
@@ -125,19 +127,16 @@ end
 
 
 def verify_length(any_string)
+  ## Takes in String and returns Boolean
   any_string.length == 10 || any_string.length == 13
 end
 
 def check_digit_contains_X(array)
-  #no_dashes_or_spaces = no_dashes_or_spaces.split("") - now splitting in main function
+  # Takes in a String and returns a String "X" = "10"
   if array[9] == "x"|| array[9] == "X"
   array[9] = "10"
   end
-     #no_dashes_or_spaces[9] == 10 # removed if statment
-     # "10"
-      #else
-      #false
-    #end
+     
   array
 end
 
